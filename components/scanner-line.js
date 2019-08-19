@@ -27,7 +27,7 @@ class RunLine extends React.Component {
 			   iterations: 2
 			}
 		).start()
-	 }
+	}
 
   	render() {
 
