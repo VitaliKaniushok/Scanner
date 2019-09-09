@@ -42,21 +42,21 @@ class Scanner extends React.Component {
 
                 <View style = {{ flex: 1 }} >
 
-                    <ScannerCamera style = { style.scannerCamera } />	          		         
+                    <ScannerCamera  />	          		         
 
-                    <View style = { style.buttonGroup }>
-
-	                    <TouchableOpacity 
-	                    	style = { style.buttonScan }
-	                    	onPress = { scaning }>
-	                    		<Text style = { style.textScan } > Scan </Text> 
-	                    </TouchableOpacity>
+                    <View style = { style.buttonGroup }>	                    
 
 	                    <TouchableOpacity 
 	                    	style = { style.buttonChange }
 	                    	onPress = { setCameraType }>
 	                    		<Text style = { style.textChange }> Change </Text>
 	                	</TouchableOpacity>
+
+                        <TouchableOpacity 
+                            style = { style.buttonScan }
+                            onPress = { scaning }>
+                                <Text style = { style.textScan } > Scan </Text> 
+                        </TouchableOpacity>
 
 	                	 <TouchableOpacity 
 	                    	style = { style.buttonSettings }
@@ -77,19 +77,18 @@ export default Scanner;
 
 const style = StyleSheet.create({
 
-    scannerCamera: {
-        flex: 1
-    },
     buttonGroup: {
-        justifyContent: 'flex-start',
-        padding: 15,
+        flex:1,
+        flexDirection:'row',
+        justifyContent: 'space-between',
+        padding: 25,
         backgroundColor: '#000'
     },
     buttonChange: {
         height: 70,
         width: 70,
         borderRadius: 10,
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-end',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#f1f1f1'
@@ -107,13 +106,13 @@ const style = StyleSheet.create({
         height: 70,
         width: 70,
         borderRadius: 10,
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'blue'
     },
     textChange: {
-        fontSize: 18,
+        fontSize: 14,
         color: '#000'
     },
     textScan: {
@@ -121,7 +120,7 @@ const style = StyleSheet.create({
         color: 'white'
     },
     textSettings: {
-        fontSize: 12,
+        fontSize: 14,
         color: 'tomato'
     }
 });

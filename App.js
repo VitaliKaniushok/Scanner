@@ -1,51 +1,30 @@
 import React from 'react';
-import { Camera } from 'expo-camera';
 import { ContextApi } from './components/context-api.js';
+import ScannerService from './components/services/scanner-service.js';
 import { AppNavContainer } from './components/app-nav-container.js';
-
-// import Scanner from './components/scanner.js';
+import { Camera } from 'expo-camera';
 
 export default class TwoMillion extends React.Component {
 
+	scannerService = new (ScannerService(this))();
+	
 	state = {
-		isScaning: false,
-		scan: 'false',
-		cameraType: Camera.Constants.Type.back,
+		isScaning: false,		
+		cameraType: this.scannerService.checkCameraBack(),
 		hasCameraPermission: null,
-		scaning: this.scaning(),
-		statusPermissions: this.statusPermissions(),
-		setCameraType:this.setCameraType()
-	}
-
-	scaning() {
-		return () => {
-			this.setState({
-				isScaning: 
-					this.state.isScaning === false ? true : false,
-				scan: 
-					this.state.scan === 'false' ? 'true' : 'false'
-			});					
-		}
-	} 
-
-	statusPermissions() {
-		return (isPermission) => {
-			this.setState({
-				hasCameraPermission: isPermission				
-			});
+		scaning: this.scannerService.scaning(),
+		statusPermissions: this.scannerService.statusPermissions(),
+		setCameraType:this.scannerService.setCameraType(),
+		scaningResult:this.scannerService.scaningResult(),
+		setMode:this.scannerService.setMode(),
+		textContent:'truthScanner',
+		speech: {
+			progressSpeak:false,			
+			language:'en',
+			pitch:0.5,
+			rate:0.5
 		}		
-	}
-
-	setCameraType() {
-		return () => {
-			this.setState({
-				cameraType:
-					this.state.cameraType === Camera.Constants.Type.back
-	                  ? Camera.Constants.Type.front
-	                  : Camera.Constants.Type.back
-			});
-		}
-	}
+	}	
 
 	render() {  	
 	    

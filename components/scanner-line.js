@@ -1,6 +1,7 @@
 import React from 'react';
 import { Animated, Dimensions } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { ContextApi } from './context-api.js';
 
 class RunLine extends React.Component {
 
@@ -16,17 +17,17 @@ class RunLine extends React.Component {
 			 Animated.sequence([
 			    Animated.timing(this.state.posX, {
 			      toValue: height,
-			      duration: 1700,			      
+			      duration: 1000,			      
 			    }),
 			    Animated.timing(this.state.posX, {
 			      toValue: -300,
-			      duration: 1700,			      
+			      duration: 1000,			      
 			    })
 			]),
 			{
-			   iterations: 2
+			   iterations: 1
 			}
-		).start()
+		).start(() => this.props.scaningResult())
 	}
 
   	render() {
@@ -47,7 +48,7 @@ class RunLine extends React.Component {
 	}
 }
 
-export default class ScannerLine extends React.Component {		
+class ScannerLine extends React.Component {		
 
 	render () {
 		
@@ -60,7 +61,8 @@ export default class ScannerLine extends React.Component {
 		          	position:'absolute',
 		        	width:width,		        	
 		          	height: 300,
-	        }} >
+	        	}} 
+	        	scaningResult={ this.context.scaningResult } >
 
 				<LinearGradient
 			        colors={['transparent','rgba(210,255,82,1)', 'transparent']}
@@ -72,3 +74,7 @@ export default class ScannerLine extends React.Component {
 		);
 	}			
 }
+
+ScannerLine.contextType = ContextApi;
+
+export default ScannerLine;

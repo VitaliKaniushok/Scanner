@@ -9,7 +9,7 @@ class ScannerCamera extends React.Component {
 
   render() {
 
-    const { isScaning, cameraType,scan } = this.context;   
+    const { isScaning, cameraType } = this.context;   
 
     if( isScaning === true ) {   
 
@@ -21,7 +21,7 @@ class ScannerCamera extends React.Component {
 
             <ScannerLine/>
           
-            <Text style={style.text}> Scanning </Text>
+            <Text style={style.textScaning}> Scanning </Text>
 
           </View>
 
@@ -36,7 +36,7 @@ class ScannerCamera extends React.Component {
        
         <View style={style.cameraContent}>
 
-          <Text style={style.text}> Ready to scan {scan} </Text>
+          <Text style={style.text}> Ready to scan </Text>
         
         </View>
 
@@ -50,7 +50,8 @@ ScannerCamera.contextType = ContextApi;
 export default ScannerCamera;
 
 const style = StyleSheet.create({
-  camera: { flex: 1},
+  camera: { flex: 3},
   cameraContent: { flex:1, backgroundColor:'transparent'},
-  text: {fontSize: 30,  color: 'red', top:100,position:'absolute',fontWeight:'bold' }
+  text: {fontSize: 30,  color: 'red', top:100,position:'absolute',fontWeight:'bold' },
+  textScaning:{fontSize: 30,  color: 'red', top:50,position:'absolute',fontWeight:'bold',width:'100%',textAlign:'center'}
 });
