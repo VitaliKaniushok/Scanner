@@ -50,7 +50,7 @@ ScannerCamera.contextType = ContextApi;
 export default ScannerCamera;
 
 const style = StyleSheet.create({
-  camera: { flex: 3},
+  camera: { flex: 4},
   cameraContent: { flex:1, backgroundColor:'transparent'},
   text: {fontSize: 30,  color: 'red', top:100,position:'absolute',fontWeight:'bold' },
   textScaning:{fontSize: 30,  color: 'red', top:50,position:'absolute',fontWeight:'bold',width:'100%',textAlign:'center'}

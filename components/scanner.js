@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet,Image } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { Camera } from 'expo-camera';
 import ScannerCamera from './scanner-camera.js';
@@ -8,15 +8,17 @@ import {ContextApi} from './context-api.js';
 class Scanner extends React.Component {
 
     static navigationOptions = {
-        title: 'Home',
+        title: 'Scanner',
         headerStyle: {
-          backgroundColor: '#f4511e',
-        },
-        headerTintColor: '#fff',
+          backgroundColor: '#000',
+        },      
+        tabBarVisible:false,  
+        headerTintColor: '#0d7f06',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-      };
+       
+      };    
 
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -49,19 +51,28 @@ class Scanner extends React.Component {
 	                    <TouchableOpacity 
 	                    	style = { style.buttonChange }
 	                    	onPress = { setCameraType }>
-	                    		<Text style = { style.textChange }> Change </Text>
+	                    		<Image
+                                    style = { style.buttonChangeImg }
+                                    source={require('../suorces/change_camera.png')}
+                                  />
 	                	</TouchableOpacity>
 
                         <TouchableOpacity 
                             style = { style.buttonScan }
                             onPress = { scaning }>
-                                <Text style = { style.textScan } > Scan </Text> 
+                                <Image
+                                    style = { style.buttonScanImg }
+                                    source={require('../suorces/push.png')}
+                                  /> 
                         </TouchableOpacity>
 
 	                	 <TouchableOpacity 
 	                    	style = { style.buttonSettings }
 	                    	onPress={() => this.props.navigation.navigate('Details')}>
-	                    		<Text style = { style.textSettings }> Settings </Text>
+	                    		<Image
+                                    style = { style.buttonSettingsImg }
+                                    source={require('../suorces/settings_3.png')}
+                                  />
 	                	</TouchableOpacity>
 
 	            	</View>
@@ -81,46 +92,38 @@ const style = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         justifyContent: 'space-between',
-        padding: 25,
+        padding: 15,
         backgroundColor: '#000'
     },
     buttonChange: {
         height: 70,
-        width: 70,
-        borderRadius: 10,
+        width: 70,       
         alignSelf: 'flex-end',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f1f1f1'
+        justifyContent: 'center',       
+    },
+    buttonChangeImg:{
+        height: 70,
+        width: 70,
     },
     buttonSettings: {
         height: 70,
-        width: 70,
-        borderRadius: 10,        
+        width: 70,                
         alignSelf: 'flex-end',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f1f1f1'
+        justifyContent: 'center'        
     },
-    buttonScan: {
+    buttonSettingsImg:{
         height: 70,
         width: 70,
-        borderRadius: 10,
+    },
+    buttonScan: {       
         alignSelf: 'flex-start',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'blue'
+        justifyContent: 'center',       
     },
-    textChange: {
-        fontSize: 14,
-        color: '#000'
-    },
-    textScan: {
-        fontSize: 18,
-        color: 'white'
-    },
-    textSettings: {
-        fontSize: 14,
-        color: 'tomato'
+    buttonScanImg: {
+        width:70,
+        height:70
     }
 });

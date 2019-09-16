@@ -14,4 +14,5 @@ const AppNavigator = createStackNavigator(
   	initialRouteName: "Home"
   }
 );
+
 export const AppNavContainer = createAppContainer(AppNavigator);

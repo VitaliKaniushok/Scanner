@@ -13,7 +13,6 @@ const alienScanner = [
     "I feel stardust, attention, this is an alien!"
 ];
  
-
 function chooseText(arg) {
 
     let l = arg.length;
