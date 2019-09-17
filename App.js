@@ -17,6 +17,9 @@ export default class TwoMillion extends React.Component {
 		setCameraType:this.scannerService.setCameraType(),
 		scaningResult:this.scannerService.scaningResult(),
 		setMode:this.scannerService.setMode(),
+		listVisible:false,
+		hideList:this.scannerService.hideList(),
+		setLanguage:this.scannerService.setLanguage(),
 		textContent:'truthScanner',
 		speech: {
 			progressSpeak:false,			

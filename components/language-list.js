@@ -1,47 +1,70 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
+const DATA = [  
+    { key: 'english', code:'en',image:require("../sources/en.jpg") },
+    { key: 'русский', code:'ru',image:require("../sources/ru.jpg") },
+    { key: 'ジャポネス', code:'ja',image:require("../sources/ja.jpg") },
+    { key: 'française', code:'fr',image:require("../sources/fr.jpg") },
+    { key: '折角', code:'zh',image:require("../sources/zh.jpg") }
+];
 
-export default class LanguageList extends Component {
+export class LanguageList extends Component {
 
   render() {
 
-    return (
+    if (this.props.listVisible === false) {
+        return null
+
+    } else {
+
+       return (
       
         <FlatList
-          data={[
-            { key: 'English' },
-            { key: 'Russian' },
-            { key: 'Japones' },
-            { key: 'French' },
-            { key: 'Chine' },           
-          ]}
-          renderItem={ ({item}) => (
-            
-            <TouchableOpacity onPress = {()=>{}  }
-                              style={styles.item}>
-                      
-              <Text style={styles.text}>{item.key}</Text>
-             
-            </TouchableOpacity>
+          data={DATA}
+          renderItem={ ({item}) => (    
+           
+            <View style={styles.listItem}>
+
+              <TouchableOpacity style={styles.item}
+                  onPress = {this.props.setLanguage(item.code)}>
+                
+               <Image
+                    style={styles.styleImage}
+                    source={item.image}
+                  /> 
+
+                <Text style={styles.text}>{item.key}</Text>
+               
+              </TouchableOpacity>
+
+            </View>
+
           )}
-        />
-     
-    );
+        />     
+      )
+    }   
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 22,
+  styleImage:{
+    flex:1,
+    height:40,
+    borderRadius:7
   },
   item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44
+    
+    flexDirection:'row'
+  },
+  listItem: {
+    display:'flex',    
+    padding: 10     
   },
   text:{
-    color:'tomato'
+    flex:5,
+    textAlign:'center',
+    fontSize:22,
+    color:'#fff'
   }
 });

@@ -53,7 +53,35 @@ function ScannerService(obj) {
 					});
 				}				                
 		    }
-		}		
+		}
+
+		setLanguage() {
+			return function(lang) {
+
+				return function(){
+						obj.setState( ({ speech }) => {
+
+							let newObj = {...speech, language: lang };
+
+							return {
+								speech: newObj
+							}
+				      		
+				      	}
+			      	);
+				}
+			}
+		}
+
+		hideList() {
+			return function() {				
+				
+				obj.setState({
+					listVisible: !obj.state.listVisible									
+				});				
+				
+			}
+		}
 
 		scaningResult() {
 			
@@ -66,7 +94,7 @@ function ScannerService(obj) {
 
 			      		speech: {...state.speech,
 							progressSpeak: true }
-						}),
+						})
 			      	);
 			    };
 			    const complete = () => {

@@ -3,7 +3,6 @@ import { Text, StyleSheet ,View } from 'react-native';
 import { Camera } from 'expo-camera';
 import {ContextApi} from './context-api.js';
 import ScannerLine from './scanner-line.js';
-import { LinearGradient } from 'expo-linear-gradient';
 
 class ScannerCamera extends React.Component {
 

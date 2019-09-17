@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet,Image } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import * as Permissions from 'expo-permissions';
-import { Camera } from 'expo-camera';
 import ScannerCamera from './scanner-camera.js';
 import {ContextApi} from './context-api.js';
 
@@ -53,7 +52,7 @@ class Scanner extends React.Component {
 	                    	onPress = { setCameraType }>
 	                    		<Image
                                     style = { style.buttonChangeImg }
-                                    source={require('../suorces/change_camera.png')}
+                                    source={require('../sources/change_camera.png')}
                                   />
 	                	</TouchableOpacity>
 
@@ -62,7 +61,7 @@ class Scanner extends React.Component {
                             onPress = { scaning }>
                                 <Image
                                     style = { style.buttonScanImg }
-                                    source={require('../suorces/push.png')}
+                                    source={require('../sources/push.png')}
                                   /> 
                         </TouchableOpacity>
 
@@ -71,7 +70,7 @@ class Scanner extends React.Component {
 	                    	onPress={() => this.props.navigation.navigate('Details')}>
 	                    		<Image
                                     style = { style.buttonSettingsImg }
-                                    source={require('../suorces/settings_3.png')}
+                                    source={require('../sources/settings.png')}
                                   />
 	                	</TouchableOpacity>
 

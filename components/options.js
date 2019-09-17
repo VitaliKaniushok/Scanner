@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet,TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, StyleSheet,TouchableOpacity, ScrollView,Image } from 'react-native';
 import {ContextApi} from './context-api.js';
 import  {LanguageList}  from './language-list.js';
 
@@ -18,14 +18,14 @@ class Options extends React.Component {
 
   	render() {  
 
-	const { setMode } = this.context;
-    	
+
+	const { setMode, setLanguage, listVisible, hideList, speech } = this.context;
       	return (
 
 	        <ScrollView style={style.optionsContainer}>
-     	    
-		       
 		        <View style={style.box}>
+
+		        	<Text style = { style.text }>Select Mode</Text>
 
 		        	<View style={style.boxMode}>
 		       
@@ -50,11 +50,28 @@ class Options extends React.Component {
 
             	</View>
 
+            	
+            	<View style={style.box}>
+
+            		<TouchableOpacity onPress = { hideList }>
+                		<Image
+		                    style={style.styleImage}
+		                    source={require('../sources/en.jpg')}
+		                  /> 
+
+        			<Text style={style.text}>{speech.language}</Text>
+		            </TouchableOpacity>
+
+            		
+            		<LanguageList setLanguage={setLanguage}
+            					listVisible={listVisible}/>
+            	</View>
 
             	<View style={style.box}>
 
             		
-
+        			<Text style={style.text}>Next text</Text>
+		            
             	</View>
 		      
 	        </ScrollView>
@@ -83,6 +100,7 @@ const style = StyleSheet.create({
 	boxMode:{
 		flex:1,
 		flexDirection:'row',
+		paddingTop:15,
 		justifyContent:'space-around'
 	},
 	buttonChange: {
@@ -103,6 +121,10 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'green'
     },
+	styleImage:{
+	    height:40,
+	    borderRadius:7
+	  },
   	text: { fontSize: 14,  color: '#fff', textAlign:'center' }
   	
 });
