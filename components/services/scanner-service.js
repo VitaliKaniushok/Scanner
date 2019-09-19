@@ -49,24 +49,30 @@ function ScannerService(obj) {
 
 				return function(){
 						obj.setState({
-						textContent: mode				
+						speechText: mode				
 					});
 				}				                
 		    }
 		}
 
 		setLanguage() {
-			return function(lang) {
+			return function(lang,definition) {
 
 				return function(){
-						obj.setState( ({ speech }) => {
+						obj.setState( ( state ) => {
 
-							let newObj = {...speech, language: lang };
+							let newState = {
 
-							return {
-								speech: newObj
+								...state,
+								listVisible: false,
+								speech:{
+									...state.speech,
+									language: lang,
+									langDefinition:definition
+								}
 							}
-				      		
+
+							return newState;				      		
 				      	}
 			      	);
 				}
@@ -87,7 +93,7 @@ function ScannerService(obj) {
 			
 			return function() {
 
-				let text = textDefinition(obj.state.textContent);
+				let text = textDefinition(obj.state.speechText);
 
 				const start = () => {
 			      	obj.setState( state => ({

@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import {ContextApi} from './context-api.js';
+import DATA from './services/images-definition.js';
+// const DATA = [  
+//     { key: 'english', code:'en',image:require("../sources/en.jpg") },
+//     { key: 'русский', code:'ru',image:require("../sources/ru.jpg") },
+//     { key: 'ジャポネス', code:'ja',image:require("../sources/ja.jpg") },
+//     { key: 'française', code:'fr',image:require("../sources/fr.jpg") },
+//     { key: '折角', code:'zh',image:require("../sources/zh.jpg") }
+// ];
 
-const DATA = [  
-    { key: 'english', code:'en',image:require("../sources/en.jpg") },
-    { key: 'русский', code:'ru',image:require("../sources/ru.jpg") },
-    { key: 'ジャポネス', code:'ja',image:require("../sources/ja.jpg") },
-    { key: 'française', code:'fr',image:require("../sources/fr.jpg") },
-    { key: '折角', code:'zh',image:require("../sources/zh.jpg") }
-];
-
-export class LanguageList extends Component {
+class LanguageList extends Component {
 
   render() {
 
-    if (this.props.listVisible === false) {
+    const { setLanguage, listVisible } = this.context;
+
+    if (listVisible === false) {
         return null
 
     } else {
@@ -24,17 +27,17 @@ export class LanguageList extends Component {
           data={DATA}
           renderItem={ ({item}) => (    
            
-            <View style={styles.listItem}>
+            <View style={style.listItem}>
 
-              <TouchableOpacity style={styles.item}
-                  onPress = {this.props.setLanguage(item.code)}>
+              <TouchableOpacity style={style.item}
+                  onPress = {setLanguage(item.code,item.key)}>
                 
                <Image
-                    style={styles.styleImage}
+                    style={style.styleImage}
                     source={item.image}
                   /> 
 
-                <Text style={styles.text}>{item.key}</Text>
+                <Text style={style.text}>{item.key}</Text>
                
               </TouchableOpacity>
 
@@ -46,20 +49,21 @@ export class LanguageList extends Component {
     }   
   }
 }
+LanguageList.contextType = ContextApi;
+export default LanguageList;
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({  
+  listItem: {
+    flex:1,    
+    paddingTop: 20     
+  },
+  item: {    
+    flexDirection:'row'
+  },
   styleImage:{
     flex:1,
     height:40,
     borderRadius:7
-  },
-  item: {
-    
-    flexDirection:'row'
-  },
-  listItem: {
-    display:'flex',    
-    padding: 10     
   },
   text:{
     flex:5,

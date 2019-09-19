@@ -9,15 +9,14 @@ class Scanner extends React.Component {
     static navigationOptions = {
         title: 'Scanner',
         headerStyle: {
-          backgroundColor: '#000',
+          backgroundColor: '#000'
         },      
         tabBarVisible:false,  
         headerTintColor: '#0d7f06',
         headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-       
-      };    
+          fontWeight: 'bold'
+        }       
+    };    
 
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -51,7 +50,7 @@ class Scanner extends React.Component {
 	                    	style = { style.buttonChange }
 	                    	onPress = { setCameraType }>
 	                    		<Image
-                                    style = { style.buttonChangeImg }
+                                    style = { style.buttonImg }
                                     source={require('../sources/change_camera.png')}
                                   />
 	                	</TouchableOpacity>
@@ -60,7 +59,7 @@ class Scanner extends React.Component {
                             style = { style.buttonScan }
                             onPress = { scaning }>
                                 <Image
-                                    style = { style.buttonScanImg }
+                                    style = { style.buttonImg }
                                     source={require('../sources/push.png')}
                                   /> 
                         </TouchableOpacity>
@@ -69,7 +68,7 @@ class Scanner extends React.Component {
 	                    	style = { style.buttonSettings }
 	                    	onPress={() => this.props.navigation.navigate('Details')}>
 	                    		<Image
-                                    style = { style.buttonSettingsImg }
+                                    style = { style.buttonImg }
                                     source={require('../sources/settings.png')}
                                   />
 	                	</TouchableOpacity>
@@ -94,35 +93,29 @@ const style = StyleSheet.create({
         padding: 15,
         backgroundColor: '#000'
     },
+    buttonImg:{
+        height: 70,
+        width: 70,
+    },
     buttonChange: {
         height: 70,
         width: 70,       
         alignSelf: 'flex-end',
         alignItems: 'center',
         justifyContent: 'center',       
-    },
-    buttonChangeImg:{
-        height: 70,
-        width: 70,
-    },
+    },    
     buttonSettings: {
         height: 70,
         width: 70,                
         alignSelf: 'flex-end',
         alignItems: 'center',
         justifyContent: 'center'        
-    },
-    buttonSettingsImg:{
+    },    
+    buttonScan: {
         height: 70,
-        width: 70,
-    },
-    buttonScan: {       
+        width: 70,     
         alignSelf: 'flex-start',
         alignItems: 'center',
         justifyContent: 'center',       
-    },
-    buttonScanImg: {
-        width:70,
-        height:70
     }
 });

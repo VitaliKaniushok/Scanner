@@ -20,11 +20,12 @@ export default class TwoMillion extends React.Component {
 		listVisible:false,
 		hideList:this.scannerService.hideList(),
 		setLanguage:this.scannerService.setLanguage(),
-		textContent:'truthScanner',
+		speechText:'truthScanner',
 		speech: {
 			progressSpeak:false,			
 			language:'en',
-			pitch:0.5,
+			langDefinition:"english",			
+			pitch:0.1,
 			rate:0.5
 		}		
 	}	
