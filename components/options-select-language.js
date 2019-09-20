@@ -48,8 +48,7 @@ const style = StyleSheet.create({
     padding:10,
     borderRadius:20,
     alignItems:'center',
-    backgroundColor: 'rgba(167,174,166,0.2)',
-
+    backgroundColor: 'rgba(167,174,166,0.2)'
   },
   styleImage:{
     flex:1,

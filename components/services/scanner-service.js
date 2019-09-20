@@ -47,11 +47,23 @@ function ScannerService(obj) {
 		setMode() {
 			return function(mode) {
 
-				return function(){
-						obj.setState({
-						speechText: mode				
-					});
-				}				                
+				if (typeof mode === 'string') {
+
+					return function(){
+							obj.setState({
+								selfMode:false,
+								speechText: mode				
+						});
+					}
+				}else{
+
+					return function(){
+							obj.setState({
+								selfMode:true,
+								speechText: ['new']				
+						});
+					}
+				}								                
 		    }
 		}
 
@@ -86,6 +98,73 @@ function ScannerService(obj) {
 					listVisible: !obj.state.listVisible									
 				});				
 				
+			}
+		}
+
+		applySelfList() {
+
+			return function(itemText,index) {
+
+				return function(){
+
+					obj.setState( ( state ) => {
+
+						const oldSpeech = state.speechText.slice(0);
+
+						const l = oldSpeech.length;
+
+						if (l === 1) {
+
+							let newState = {
+								...state,
+								speechText: [itemText]
+							}
+
+							return newState;
+						}						
+
+						const before = oldSpeech.slice(0, index);
+						const after = oldSpeech.slice(index+1);
+
+						const newArrayData = [ ...before, itemText, ...after ];
+												
+						let newState = {
+							...state,
+							speechText: newArrayData
+						}
+
+						return newState;
+															
+					});
+				}
+
+			}
+		}
+
+		addSelfItem() {
+
+			return function() {				
+
+				obj.setState( ( state ) => {
+
+					const oldSpeech = state.speechText.slice(0);
+
+					const l = oldSpeech.length -1;
+
+					if (oldSpeech[l] === '') return state;					
+
+					oldSpeech.push('');
+											
+					let newState = {
+						...state,
+						speechText: oldSpeech
+					}
+
+					return newState;
+														
+				});
+				
+
 			}
 		}
 

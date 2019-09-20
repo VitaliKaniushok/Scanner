@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import OptionsSelectMode from './options-select-mode.js';
+import OptionsSelfMode from './options-self-mode.js';
 import OptionsSelectLanguage from './options-select-language.js';
 
 export default class Options extends React.Component {
@@ -24,7 +25,9 @@ export default class Options extends React.Component {
 
 		        <OptionsSelectMode />
             	
-            	<OptionsSelectLanguage />            	
+            	<OptionsSelectLanguage />
+
+            	<OptionsSelfMode />          	
 		      
 	        </ScrollView>
       	);
