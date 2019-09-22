@@ -47,22 +47,22 @@ function ScannerService(obj) {
 		setMode() {
 			return function(mode) {
 
-				if (typeof mode === 'string') {
-
+				if ( mode === 'selfMode' ) {
+			
 					return function(){
 							obj.setState({
-								selfMode:false,
-								speechText: mode				
+								selfMode:true,
+								speechText: []				
 						});
 					}
 				}else{
 
 					return function(){
 							obj.setState({
-								selfMode:true,
-								speechText: ['new']				
+								selfMode:false,
+								speechText: mode				
 						});
-					}
+					}					
 				}								                
 		    }
 		}
@@ -101,70 +101,55 @@ function ScannerService(obj) {
 			}
 		}
 
-		applySelfList() {
+		removeSelfItem() {
+			return function(id) {
 
-			return function(itemText,index) {
-
-				return function(){
+				return function() {
 
 					obj.setState( ( state ) => {
 
-						const oldSpeech = state.speechText.slice(0);
-
-						const l = oldSpeech.length;
-
-						if (l === 1) {
-
-							let newState = {
-								...state,
-								speechText: [itemText]
-							}
-
-							return newState;
-						}						
-
-						const before = oldSpeech.slice(0, index);
-						const after = oldSpeech.slice(index+1);
-
-						const newArrayData = [ ...before, itemText, ...after ];
+						const beforeArr = state.speechText.slice(0,id);
+						const afterArr = state.speechText.slice(id+1);
+						
+						const newArr =[...beforeArr,...afterArr];
 												
 						let newState = {
 							...state,
-							speechText: newArrayData
+							speechText: newArr
 						}
 
 						return newState;
 															
-					});
+					});	
 				}
-
 			}
 		}
 
 		addSelfItem() {
 
-			return function() {				
+			return function(newSelfText, fun) {
 
-				obj.setState( ( state ) => {
+				return function() {	
 
-					const oldSpeech = state.speechText.slice(0);
+					if (newSelfText === '') return;			
 
-					const l = oldSpeech.length -1;
+					obj.setState( ( state ) => {
 
-					if (oldSpeech[l] === '') return state;					
+						const oldSpeech = state.speechText.slice(0);
+						
+						oldSpeech.push(newSelfText);
+												
+						let newState = {
+							...state,
+							speechText: oldSpeech
+						}
 
-					oldSpeech.push('');
-											
-					let newState = {
-						...state,
-						speechText: oldSpeech
-					}
+						return newState;
+															
+					});
 
-					return newState;
-														
-				});
-				
-
+					fun();	
+				}
 			}
 		}
 

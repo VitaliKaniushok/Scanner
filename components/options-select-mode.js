@@ -31,7 +31,7 @@ class OptionsSelectMode extends React.Component {
 
 	            	<TouchableOpacity 
 	                	style = { [styles.buttonMode, (typeof speechText ==='object')?styles.activeButton:styles.noActiveButton] }
-	                	onPress = { setMode([]) }>
+	                	onPress = { setMode('selfMode') }>
 	                		<Text style = { styles.text }>Self Mode</Text>
 	            	</TouchableOpacity>
 

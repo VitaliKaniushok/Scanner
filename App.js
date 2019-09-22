@@ -20,7 +20,7 @@ export default class TwoMillion extends React.Component {
 		listVisible:false,
 		selfMode:false,
 		addSelfItem:this.scannerService.addSelfItem(),
-		applySelfList:this.scannerService.applySelfList(),
+		removeSelfItem:this.scannerService.removeSelfItem(),		
 		hideList:this.scannerService.hideList(),
 		setLanguage:this.scannerService.setLanguage(),
 		speechText:'truthScanner',

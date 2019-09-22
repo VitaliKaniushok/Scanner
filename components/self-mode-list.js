@@ -1,73 +1,60 @@
-import React, { Component, useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import React, { Component } from 'react';
+import { FlatList, View } from 'react-native';
 import {ContextApi} from './context-api.js';
-
-const InputItem = (props) => {
-
-  
-
-  const [value, onChangeText] = React.useState(props.text);
-
-  const {applySelfList,idx} = props;
-
-  return(
-
-    <View style={styles.listItem}>
-
-      <TextInput
-        style={ styles.input}
-        onChangeText={text => onChangeText(text)}
-        onEndEditing={applySelfList(value,idx)}
-        value={value}
-      />
-
-    </View>
-  )  
-}
+import TextSelfList from './text-self-list.js';
+import SelfInput from './self-input.js';
 
 class SelfModeList extends Component {
 
+   renderSeparator = () => {
+      return (
+        <View
+          style={{
+            height: 1,
+            flex:1,
+            marginTop:10,
+            backgroundColor: "#000"            
+          }}
+        />
+      );
+    };
+
   render() {
 
-    const { speechText, applySelfList } = this.context;
+    const { speechText, removeSelfItem } = this.context;   
 
-    let idx=0;
+    if ( speechText.length === 0) {
 
-    const selfList = speechText.map((item) => {
-      
-      idx++;
       return (
-        
-        <InputItem 
-          key={idx}
-          idx={idx}
-          text={item}
-          applySelfList={applySelfList} />
+
+        <SelfInput/>
       )
-    });
-  
-    return (  
-      <View>
-        {selfList}
+    }
+
+    return (
+
+      <View>  
+
+        <FlatList
+          data={speechText}
+          renderItem={ ({item, index}) => (
+
+            <TextSelfList 
+              text={item}
+              id={index}
+              removeSelfItem={removeSelfItem}/>
+
+          )}
+          keyExtractor={(item, index) => ''+index}
+          ItemSeparatorComponent={this.renderSeparator}
+        />
+
+        <SelfInput/>
+
       </View>
     )
   }       
 }
-
 SelfModeList.contextType = ContextApi;
-export default SelfModeList;
 
-const styles = StyleSheet.create({  
-  listItem: {
-    flex:1,    
-    paddingTop: 20        
-  },
-  input:{
-    flex:1,
-    borderColor: 'gray',
-    borderWidth: 1,
-    fontSize:22,
-    color:'#000',
-    backgroundColor:'#fff'
-  }
-});
+export default SelfModeList;
