@@ -9,13 +9,23 @@ function ScannerService(obj) {
 		scaning() {
 			return function() {
 
-				if (obj.state.isScaning) return;
+				if ( (obj.state.isScaning) || (!obj.state.isFaceDetected) ) return;
 
 				obj.setState({
 					isScaning: true				
 				});					
 			}
-		} 
+		}
+
+		handleFacesDetected() {
+
+			return function() {
+
+				obj.setState({
+					isFaceDetected: !obj.state.isFaceDetected					
+				});
+			}
+		}
 
 		statusPermissions() {
 			return function(isPermission) {
@@ -155,9 +165,19 @@ function ScannerService(obj) {
 
 		scaningResult() {
 			
-			return function() {
+			return function() {				
 
 				let text = textDefinition(obj.state.speechText);
+
+				if (!obj.state.isFaceDetected) {
+
+					obj.setState({ 
+			      		isScaning: false,
+			      		isFaceDetected: false  
+			      	})
+
+					return;
+				};
 
 				const start = () => {
 			      	obj.setState( state => ({

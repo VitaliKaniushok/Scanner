@@ -1,55 +1,57 @@
 import React from 'react';
 import { Text, StyleSheet ,View } from 'react-native';
-import { Camera } from 'expo-camera';
 import {ContextApi} from './context-api.js';
 import ScannerLine from './scanner-line.js';
+
 
 class ScannerCamera extends React.Component {
 
   render() {
 
-    const { isScaning, cameraType } = this.context;   
+    const { isScaning, cameraText, isFaceDetected } = this.context;   
 
-    if( isScaning === true ) {   
+    if ( isScaning && isFaceDetected ) {   
 
       return (
        
-        <Camera style={style.camera} type={cameraType}>
+        <View style={style.cameraContent}> 
 
-          <View style={style.cameraContent}> 
-
-            <ScannerLine/>
-          
-            <Text style={style.textScaning}> Scanning </Text>
-
-          </View>
-
-        </Camera>
+          <ScannerLine/>
         
-      );
-    }
+          <Text style={style.textScaning}> {cameraText.scaning} </Text>
 
-    return (
-    
-      <Camera style={style.camera} type={cameraType} >
+        </View>       
+      );
+
+    } else if ( isFaceDetected ) {
+
+      return (    
        
         <View style={style.cameraContent}>
 
-          <Text style={style.text}> Ready to scan </Text>
+          <Text style={style.text}> {cameraText.readyScan} </Text>
         
         </View>
+      );
 
-      </Camera>
+    } else {
 
-    );         
+      return (    
+       
+        <View style={style.cameraContent}>
+
+          <Text style={style.text}> {cameraText.noObject} </Text>
+        
+        </View>
+      );
+    }             
   }
 }
 ScannerCamera.contextType = ContextApi;
 
 export default ScannerCamera;
 
-const style = StyleSheet.create({
-  camera: { flex: 4},
+const style = StyleSheet.create({  
   cameraContent: { flex:1, backgroundColor:'transparent'},
   text: {fontSize: 30,  color: 'red', top:100,position:'absolute',fontWeight:'bold' },
   textScaning:{fontSize: 30,  color: 'red', top:50,position:'absolute',fontWeight:'bold',width:'100%',textAlign:'center'}

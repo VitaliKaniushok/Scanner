@@ -1,8 +1,10 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import * as Permissions from 'expo-permissions';
+import { Camera } from 'expo-camera';
 import ScannerCamera from './scanner-camera.js';
 import {ContextApi} from './context-api.js';
+import * as FaceDetector from 'expo-face-detector';
 
 class Scanner extends React.Component {
 
@@ -24,9 +26,13 @@ class Scanner extends React.Component {
         this.context.statusPermissions(isPermission);
     };
 
+    state = {
+        isDetected:0
+    }
+
     render() {
 
-        const { hasCameraPermission, scaning, setCameraType } = this.context;
+        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, handleFacesDetected } = this.context;
 
         if (hasCameraPermission === null) {
 
@@ -42,7 +48,30 @@ class Scanner extends React.Component {
 
                 <View style = {{ flex: 1 }} >
 
-                    <ScannerCamera  />	          		         
+                    <Camera style={style.camera} 
+                        type={cameraType}
+                        onFacesDetected={ ({faces}) => {
+
+                                if( faces.length === this.state.isDetected ) return;
+
+                                handleFacesDetected();
+                                this.setState({
+                                    isDetected: faces.length
+                                })                            
+                            }                            
+                        }
+
+                        faceDetectorSettings={{
+                            mode: FaceDetector.Constants.Mode.fast,
+                            detectLandmarks: FaceDetector.Constants.Landmarks.none,
+                            runClassifications: FaceDetector.Constants.Classifications.none,
+                            minDetectionInterval: 100,
+                            tracking: true }}
+                             >                    
+
+                        <ScannerCamera />
+
+                    </Camera>	          		         
 
                     <View style = { style.buttonGroup }>	                    
 
@@ -64,9 +93,11 @@ class Scanner extends React.Component {
                                   /> 
                         </TouchableOpacity>
 
-	                	 <TouchableOpacity 
+	                	<TouchableOpacity 
 	                    	style = { style.buttonSettings }
-	                    	onPress={() => this.props.navigation.navigate('Details')}>
+	                    	onPress={() => {
+                                if (isScaning) return;
+                                this.props.navigation.navigate('Details') }} >
 	                    		<Image
                                     style = { style.buttonImg }
                                     source={require('../sources/settings.png')}
@@ -85,7 +116,7 @@ Scanner.contextType = ContextApi;
 export default Scanner;
 
 const style = StyleSheet.create({
-
+    camera: { flex: 4},
     buttonGroup: {
         flex:1,
         flexDirection:'row',
