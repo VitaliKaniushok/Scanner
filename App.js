@@ -31,13 +31,17 @@ export default class TwoMillion extends React.Component {
 			pitch:0.1,
 			rate:0.5
 		},
+		incRate:this.scannerService.incRate(),
+		decRate:this.scannerService.decRate(),
+		incPitch:this.scannerService.incPitch(),
+		decPitch:this.scannerService.decPitch(),
 		cameraText: {
 			scaning:'Scaning',
 			noObject:'No object for scaning',
 			readyScan:'Ready scaning'
 		},
 		isFaceDetected: false,
-		handleFacesDetected:this.scannerService.handleFacesDetected()		
+		handleFacesDetected:this.scannerService.handleFacesDetected()	
 	}	
 
 	render() {  	

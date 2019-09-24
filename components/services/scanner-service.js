@@ -111,6 +111,100 @@ function ScannerService(obj) {
 			}
 		}
 
+		incRate() {
+			return function() {				
+				
+				obj.setState( ( state ) => {
+
+					let {rate} = state.speech;
+
+					if ( rate === 1 ) return;
+
+					rate = (rate*10+1)/10;
+
+					let newState = {
+
+						...state,						
+						speech:{
+							...state.speech,
+							rate: rate
+						}
+					}
+
+					return newState;				      		
+		      	})
+			}
+		}
+		decRate() {
+			return function() {				
+				
+				obj.setState( ( state ) => {
+
+					let {rate} = state.speech;
+
+					if ( rate === 0 ) return;
+
+					rate = (rate*10-1)/10;
+
+					let newState = {
+
+						...state,						
+						speech:{
+							...state.speech,
+							rate: rate
+						}
+					}
+				return newState;				      		
+		      	})
+			}
+		}
+		incPitch() {
+			return function() {				
+				
+				obj.setState( ( state ) => {
+
+					let {pitch} = state.speech;
+
+					if ( pitch === 0 ) return;
+
+					pitch = (pitch*10+1)/10;
+
+					let newState = {
+
+						...state,						
+						speech:{
+							...state.speech,
+							pitch: pitch
+						}
+					}
+				return newState;				      		
+		      	})
+			}
+		}
+		decPitch() {
+			return function() {				
+				
+				obj.setState( ( state ) => {
+
+					let {pitch} = state.speech;
+
+					if ( pitch === 0 ) return;
+
+					pitch = (pitch*10-1)/10;
+
+					let newState = {
+
+						...state,						
+						speech:{
+							...state.speech,
+							pitch: pitch
+						}
+					}
+				return newState;				      		
+		      	})
+			}
+		}
+
 		removeSelfItem() {
 			return function(id) {
 

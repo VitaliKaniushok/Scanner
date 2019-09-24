@@ -20,7 +20,7 @@ class OptionsSelectMode extends React.Component {
 			        <TouchableOpacity 
 	                	style = { [styles.buttonMode, speechText==='truthScanner'?styles.activeButton:styles.noActiveButton] }
 	                	onPress = { setMode('truthScanner') }>
-	                		<Text style = { styles.text } >Truth detector</Text> 
+	                		<Text style = { styles.text }>Truth detector</Text> 
 	                </TouchableOpacity>
 
 	                <TouchableOpacity 

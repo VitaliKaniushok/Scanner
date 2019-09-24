@@ -23,7 +23,7 @@ class Scanner extends React.Component {
     async componentDidMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         const isPermission = status === 'granted';
-        this.context.statusPermissions(isPermission);
+        this.context.statusPermissions(isPermission);       
     };
 
     state = {
