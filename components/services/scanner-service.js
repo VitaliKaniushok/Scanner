@@ -262,25 +262,27 @@ function ScannerService(obj) {
 
 			return function(nameEntry) {
 
-				return async function() {
+				// return async function() {
 
-					const dir =FileSystem.documentDirectory;
+				// 	const dir =FileSystem.documentDirectory;
 
-					const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+				// 	const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
 					
-			        let listData = JSON.parse(jsonData, function(k,v) {
+			 //        let listData = JSON.parse(jsonData, function(k,v) {
 
-			        	if ( k === nameEntry )
+			 //        	if ( k === nameEntry )
 
-			        	return v;
-			        });
+			 //        	return v;
+			 //        });
+
+			 //         let listData =Object.value(jsonData);
 
 
-			        obj.setState({ 
-			      		speechText: listData  
-			      	})
+			 //        obj.setState({ 
+			 //      		speechText: listData  
+			 //      	})
 
-				}
+				// }
 			}
 		}
 
@@ -288,30 +290,30 @@ function ScannerService(obj) {
 
 			return function(nameEntry) {
 
-				return async function() {
+				// return async function() {
 
-					const dir =FileSystem.documentDirectory;
+				// 	const dir =FileSystem.documentDirectory;
 
-					const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+				// 	const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
 					
-			        let listData = JSON.parse(jsonData, function(k,v) {
+			 //        let listData = JSON.parse(jsonData, function(k,v) {
 
-			        	if ( k === nameEntry ){
+			 //        	if ( k === nameEntry ){
 
-			        		return undefined;
-			        	}
+			 //        		return undefined;
+			 //        	}
 			        	
-			        });
+			 //        });
 
-			        let data = JSON.stringify(listData);
+			 //        let data = JSON.stringify(listData);
 
-			        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', data);
+			 //        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', data);
 
-			        obj.setState({ 
-			      		speechText: []  
-			      	})
+			 //        obj.setState({ 
+			 //      		speechText: []  
+			 //      	})
 
-				}
+				// }
 			}
 		}
 
@@ -332,7 +334,7 @@ function ScannerService(obj) {
 				    if ( !dataNames.exists ) {
 
 				    	const newData = {
-				    		newSelfText:arrTexts
+				    		[newSelfText]:arrTexts
 				    	}
 
 				    	const newTexts = JSON.stringify(newData);
@@ -348,14 +350,24 @@ function ScannerService(obj) {
 				    } 
 				    else {
 
-				    	// const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+				    	const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+
+				    	const parseData = JSON.parse(jsonData);
+
+				    	let textData =[];
+
+				    	Object.values(parseData).map(function(value,index){
+				    		textData[index] = value;
+				    	})
 
 				    	const newData = {
-				    		...jsonData,
-				    		newSelfText:arrTexts
+				    		...textData,
+				    		[newSelfText]:arrTexts
 				    	}
 
 				    	const newTexts = JSON.stringify(newData);
+
+				    	// await FileSystem.deleteAsync(dir+'dataSelf');
 
 				    	await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', newTexts);
 

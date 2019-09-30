@@ -52,11 +52,11 @@ class SelfTextsData extends React.Component {
         
         // const data = JSON.parse(jsonData);
 
-        // let listNames = Object.keys(data);
+        // let listNames = Object.keys(jsonData);
 
         this.setState({
     		dataNames: 'data',
-    		listNames:listNames 		
+    		listNames:jsonData 		
     	});
 
     }
@@ -93,20 +93,22 @@ class SelfTextsData extends React.Component {
 
 		      <View>  
 
-		        <FlatList
-		          data={listNames}
-		          renderItem={ ({item, index}) => (
+		        	<Text style = { styles.textNoData }>{listNames}</Text>
 
-		            <SelfNameList 
-		              text={item}
-		              id={index}
-		              selectSavedEntry = {this.onSelect(selectSavedEntry(item))}
-		              removeSavedEntry = {this.onSelect(removeSavedEntry(item))}/>
+		        	<FlatList
+			          data={listNames}
+			          renderItem={ ({item, index}) => (
 
-		          )}
-		          keyExtractor={(item, index) => ''+index}
-		          ItemSeparatorComponent={this.renderSeparator}
-		        />		        
+			            <SelfNameList 
+			              text={item}
+			              id={index}
+			              selectSavedEntry = {this.onSelect(selectSavedEntry(item))}
+			              removeSavedEntry = {this.onSelect(removeSavedEntry(item))}/>
+
+			          )}
+			          keyExtractor={(item, index) => ''+index}
+			          ItemSeparatorComponent={this.renderSeparator}
+			        />	
 
 		      </View>
 		    )
