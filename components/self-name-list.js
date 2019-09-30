@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-const TextSelfList = (props)=> {
+const SelfNameList = (props)=> {
 
-	let {id, text } = props;
+	let {id, text, selectSavedEntry, removeSavedEntry } = props;
 
   	++id;
 
@@ -11,20 +11,26 @@ const TextSelfList = (props)=> {
 
 	    <View style={styles.boxRemoveItem}>
 
-	    	<Text style={styles.selfText}>{id}.  {text}</Text>
+        <TouchableOpacity 
+          style={styles.touchSelfText}
+          onPress = { selectSavedEntry }>                  
+              
+            <Text style={styles.selfText}>{id}.  {text}</Text>
+
+        </TouchableOpacity>
 
 		    <TouchableOpacity 
-		        style={styles.removeSelfItem}
-		        onPress = { props.removeSelfItem(props.id) }>                  
+		      style={styles.removeItem}
+		      onPress = { removeSavedEntry }>                  
 		          
-		       <Text style={styles.textRemove}>-</Text>
+		        <Text style={styles.textRemove}>-</Text>
 
-	      	</TouchableOpacity>
+	      </TouchableOpacity>
 
 	    </View>
 	  )
 }
-export default TextSelfList;
+export default SelfNameList;
 
 const styles = StyleSheet.create({
   boxRemoveItem: {    
@@ -35,7 +41,7 @@ const styles = StyleSheet.create({
     alignItems:'flex-end',
     justifyContent:'space-between' 
   },
-  removeSelfItem:{
+  removeItem:{
     width:45,
     height:45,
     borderRadius:7,
@@ -48,6 +54,9 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontSize:40,
     color:'#fff'    
+  },
+  touchSelfText:{
+    flex:1
   },
   selfText: {
   	flex:1,

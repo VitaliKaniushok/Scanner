@@ -26,11 +26,11 @@ export default class Options extends React.Component {
 
 		        <OptionsSelectMode />
             	
-            	<OptionsSelectLanguage />
+            <OptionsSelectLanguage />
 
-              <OptionsSpeechMode />
+            <OptionsSpeechMode />
 
-            	<OptionsSelfMode />          	
+            <OptionsSelfMode />          	
 		      
 	        </ScrollView>
       	);

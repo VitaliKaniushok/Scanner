@@ -17,6 +17,10 @@ function chooseText(arg) {
 
     let l = arg.length;
 
+    if (l === 0) {
+        return 'No text'
+    }
+
     if (l === 1) {
         return arg[0]
     }

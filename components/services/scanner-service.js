@@ -1,6 +1,7 @@
 import {Speech} from 'expo';
 import { Camera } from 'expo-camera';
 import textDefinition from './text-definition.js';
+import * as FileSystem from 'expo-file-system';
 
 function ScannerService(obj) {
 
@@ -255,6 +256,114 @@ function ScannerService(obj) {
 					fun();	
 				}
 			}
+		}
+
+		selectSavedEntry() {
+
+			return function(nameEntry) {
+
+				return async function() {
+
+					const dir =FileSystem.documentDirectory;
+
+					const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+					
+			        let listData = JSON.parse(jsonData, function(k,v) {
+
+			        	if ( k === nameEntry )
+
+			        	return v;
+			        });
+
+
+			        obj.setState({ 
+			      		speechText: listData  
+			      	})
+
+				}
+			}
+		}
+
+		removeSavedEntry () {
+
+			return function(nameEntry) {
+
+				return async function() {
+
+					const dir =FileSystem.documentDirectory;
+
+					const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+					
+			        let listData = JSON.parse(jsonData, function(k,v) {
+
+			        	if ( k === nameEntry ){
+
+			        		return undefined;
+			        	}
+			        	
+			        });
+
+			        let data = JSON.stringify(listData);
+
+			        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', data);
+
+			        obj.setState({ 
+			      		speechText: []  
+			      	})
+
+				}
+			}
+		}
+
+		saveSelfEntry() {
+
+			return function(newSelfText) {
+
+				return async function() {
+
+					if (newSelfText === '') return;
+
+					const arrTexts = obj.state.speechText;
+
+					const dir =FileSystem.documentDirectory;
+
+				    const dataNames = await FileSystem.getInfoAsync(dir+'dataSelf/dataNames.json');        
+				        
+				    if ( !dataNames.exists ) {
+
+				    	const newData = {
+				    		newSelfText:arrTexts
+				    	}
+
+				    	const newTexts = JSON.stringify(newData);
+
+				    	// await FileSystem.deleteAsync(dir+'dataSelf');
+
+				    	await FileSystem.makeDirectoryAsync(dir+'dataSelf');
+
+				    	
+
+				        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', newTexts);
+
+				    } 
+				    else {
+
+				    	// const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+
+				    	const newData = {
+				    		...jsonData,
+				    		newSelfText:arrTexts
+				    	}
+
+				    	const newTexts = JSON.stringify(newData);
+
+				    	await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', newTexts);
+
+				    }						
+				}
+			}
+
+			
 		}
 
 		scaningResult() {
