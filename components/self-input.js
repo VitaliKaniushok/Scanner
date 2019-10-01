@@ -48,7 +48,7 @@ class SelfInput extends Component {
         
             <TouchableOpacity 
               style={styles.saveItem}
-              onPress = { saveSelfEntry('moj') }>                  
+              onPress = { this.showDialog }>                  
                 
               <Text style={styles.textSave}>Save entry</Text>
 

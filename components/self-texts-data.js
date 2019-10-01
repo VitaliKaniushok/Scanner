@@ -27,16 +27,21 @@ class SelfTextsData extends React.Component {
 
     onSelect = (func) => {
 
-    	this.setState({
-    		dataNames: false
-    	});
+    	return () => {
 
-    	func();
+	    		this.setState({
+	    		dataNames: false
+	    	});
+
+	    	func();
+    	}    	
     }
 
     generateListName = async () => {
 
     	const dir =FileSystem.documentDirectory;
+
+    	// await FileSystem.deleteAsync(dir+'dataSelf');
 
         const dataNames = await FileSystem.getInfoAsync(dir+'dataSelf/dataNames.json');        
         
@@ -48,15 +53,21 @@ class SelfTextsData extends React.Component {
         }
 
         const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
-
         
-        // const data = JSON.parse(jsonData);
+        const data = JSON.parse(jsonData);
 
-        // let listNames = Object.keys(jsonData);
+        let listNames = Object.keys(data);
+
+        if (!listNames.length) {
+
+        	return this.setState({
+        		dataNames:'no-data'		
+        	});
+        }
 
         this.setState({
     		dataNames: 'data',
-    		listNames:jsonData 		
+    		listNames:listNames 		
     	});
 
     }
@@ -93,9 +104,7 @@ class SelfTextsData extends React.Component {
 
 		      <View>  
 
-		        	<Text style = { styles.textNoData }>{listNames}</Text>
-
-		        	<FlatList
+		      		<FlatList
 			          data={listNames}
 			          renderItem={ ({item, index}) => (
 
@@ -108,12 +117,11 @@ class SelfTextsData extends React.Component {
 			          )}
 			          keyExtractor={(item, index) => ''+index}
 			          ItemSeparatorComponent={this.renderSeparator}
-			        />	
+			        />
 
 		      </View>
 		    )
-		}
-		
+		}		
 	}
 }
 

@@ -8,15 +8,16 @@ export default class DialogSaveEntry extends React.Component {
 		text:''
 	}
 
+	handleS = (fn1,fn2) => {
+		return function() {
+			fn1();
+			fn2();
+		}				
+	}
+
 	render () {
 
 		const { handleCancel, saveSelfEntry, handleSave } = this.props;
-
-		const handleS = () =>{
-			saveSelfEntry(this.state.text);
-			handleSave();
-			
-		}
 
 	    return (
 	      <View>
@@ -31,7 +32,7 @@ export default class DialogSaveEntry extends React.Component {
 	          	onChangeText={(text) => this.setState({text})}
             	value={this.state.text}/>
 	          <Dialog.Button label="Cancel" onPress={handleCancel}/>
-	          <Dialog.Button label="Save" onPress={handleS}/>
+	          <Dialog.Button label="Save" onPress={this.handleS(saveSelfEntry(this.state.text),handleSave)}/>
 	        </Dialog.Container>
 	      </View>
 	    )
@@ -48,5 +49,4 @@ const styles = StyleSheet.create({
 	    color:'#000',
 	    backgroundColor:'#fff'
 	}
-
 });
