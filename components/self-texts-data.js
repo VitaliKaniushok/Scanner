@@ -9,31 +9,19 @@ class SelfTextsData extends React.Component {
 
 	state = {
 		dataNames: false,
-		listNames:null
+		listNames:null,
+        selectedEnry:''
 	}
 
-	renderSeparator = () => {
-      return (
-        <View
-          style={{
-            height: 1,
-            flex:1,
-            marginTop:10,
-            backgroundColor: "#000"            
-          }}
-        />
-      );
-    };
-
-    onSelect = (func) => {
+    onHandleClick = (func) => {
 
     	return () => {
 
-	    		this.setState({
-	    		dataNames: false
-	    	});
-
-	    	func();
+    		this.setState({
+    		  dataNames: false
+        	});
+            
+    	    func();
     	}    	
     }
 
@@ -69,30 +57,44 @@ class SelfTextsData extends React.Component {
     		dataNames: 'data',
     		listNames:listNames 		
     	});
-
     }
 
 	componentDidMount() {
 
 		this.generateListName();
-
     };
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps,prevState) {
+
+        if(this.context.selectedEnry !== prevState.selectedEnry) {
+
+            this.setState({
+                selectedEnry:this.context.selectedEnry
+            });
+            return this.generateListName();
+        }
 
     	if (this.state.dataNames === false)
-    		this.generateListName();
+    		return this.generateListName();
     }
 
 	render () {
 
-		const { dataNames, listNames } = this.state;
+		const { dataNames, listNames, selectedEnry  } = this.state;
 
-		const { removeSavedEntry, selectSavedEntry } = this.context; 
+		const { removeSavedEntry, selectSavedEntry } = this.context;
 
 		if ( !dataNames ) {
 
-			return <ActivityIndicator size="small" color="green" />
+			return (
+
+                <View style={styles.activityIndicWrap}>
+
+                    <ActivityIndicator size="large" color="green" />
+
+                </View>
+
+                ) 
 
 		} else if ( dataNames === 'no-data') {
 
@@ -102,7 +104,7 @@ class SelfTextsData extends React.Component {
 
 			return (
 
-		      <View>  
+		      <View style={styles.boxTextsData}>  
 
 		      		<FlatList
 			          data={listNames}
@@ -111,12 +113,12 @@ class SelfTextsData extends React.Component {
 			            <SelfNameList 
 			              text={item}
 			              id={index}
-			              selectSavedEntry = {this.onSelect(selectSavedEntry(item))}
-			              removeSavedEntry = {this.onSelect(removeSavedEntry(item))}/>
+                          selectedEnry={selectedEnry}
+			              selectSavedEntry = {this.onHandleClick(selectSavedEntry(item))}
+			              removeSavedEntry = {this.onHandleClick(removeSavedEntry(item))}/>
 
 			          )}
-			          keyExtractor={(item, index) => ''+index}
-			          ItemSeparatorComponent={this.renderSeparator}
+			          keyExtractor={(item, index) => ''+index}			          
 			        />
 
 		      </View>
@@ -130,20 +132,25 @@ export default SelfTextsData;
 
 const styles = StyleSheet.create({
   
-  textNoData: { 
-    fontSize: 20,  
-    color: '#000',
-    textAlign:'center',
-    paddingTop:5,
-    paddingBottom:5,
-    marginBottom:10,
-    marginTop:10,    
-    backgroundColor:'rgba(255,255,255,0.2)'    
-  },
-  nameEntry: {
-  	flex:1,
-    fontSize: 20,  
-    color: '#000'
-  }
+    textNoData: { 
+        fontSize: 20,  
+        color: '#000',
+        textAlign:'center',
+        paddingTop:5,
+        paddingBottom:5,
+        marginBottom:20,
+        marginTop:10,    
+        backgroundColor:'rgba(255,255,255,0.2)'    
+    },
+    boxTextsData: {
+      	marginBottom:20,
+        paddingBottom:30,
+        borderBottomColor: '#000',
+        borderBottomWidth: 2
+    },
+    activityIndicWrap:{
+        flex:1,
+        height:100
+    }
   	
 });

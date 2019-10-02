@@ -32,7 +32,7 @@ class Scanner extends React.Component {
 
     render() {
 
-        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, handleFacesDetected } = this.context;
+        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, facesDetected } = this.context;
 
         if (hasCameraPermission === null) {
 
@@ -54,7 +54,15 @@ class Scanner extends React.Component {
 
                                 if( faces.length === this.state.isDetected ) return;
 
-                                handleFacesDetected();
+                                if( faces.length == 0 ) {
+
+                                    facesDetected();
+                                    return this.setState({
+                                        isDetected: 0
+                                    });
+                                }
+
+                                facesDetected();
                                 this.setState({
                                     isDetected: faces.length
                                 })                            

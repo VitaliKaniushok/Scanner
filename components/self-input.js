@@ -23,8 +23,7 @@ class SelfInput extends Component {
     this.setState({ dialogVisible: false });
   };
 
-  handleSave = () => {
-   
+  handleSave = () => {   
     this.setState({ dialogVisible: false });
   };
 
@@ -98,8 +97,8 @@ const styles = StyleSheet.create({
     justifyContent:'space-between'
   },
   saveItem:{
-    width:65,
-    height:45,
+    flexWrap:'wrap',
+    padding: 10,
     borderRadius:7,
     alignItems:'center',
     justifyContent:'center',   

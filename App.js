@@ -2,31 +2,32 @@ import React from 'react';
 import { ContextApi } from './components/context-api.js';
 import ScannerService from './components/services/scanner-service.js';
 import { AppNavContainer } from './components/app-nav-container.js';
-import { Camera } from 'expo-camera';
 
 export default class TwoMillion extends React.Component {
 
 	scannerService = new (ScannerService(this))();
 	
-	state = {
-		isScaning: false,		
-		cameraType: this.scannerService.checkCameraBack(),
-		hasCameraPermission: null,
+	state = {			
+		
+		isScaning: false,
 		scaning: this.scannerService.scaning(),
-		statusPermissions: this.scannerService.statusPermissions(),
-		setCameraType:this.scannerService.setCameraType(),
 		scaningResult:this.scannerService.scaningResult(),
-		setMode:this.scannerService.setMode(),
+
+		hasCameraPermission: null,
+		statusPermissions: this.scannerService.statusPermissions(),
+		
 		listVisible:false,
-		selfMode:false,
-		addSelfItem:this.scannerService.addSelfItem(),
-		removeSelfItem:this.scannerService.removeSelfItem(),
-		selectSavedEntry:this.scannerService.selectSavedEntry(),
-		saveSelfEntry:this.scannerService.saveSelfEntry(),
-		removeSavedEntry:this.scannerService.removeSavedEntry(),	
 		hideList:this.scannerService.hideList(),
-		setLanguage:this.scannerService.setLanguage(),
-		speechText:'truthScanner',
+
+		isFaceDetected: false,
+		facesDetected:this.scannerService.facesDetected(),
+
+		selfMode:false,
+		setMode:this.scannerService.setMode(),
+
+		cameraType: this.scannerService.checkCameraBack(),		
+		setCameraType:this.scannerService.setCameraType(),
+		
 		speech: {
 			progressSpeak:false,			
 			language:'en',
@@ -34,17 +35,27 @@ export default class TwoMillion extends React.Component {
 			pitch:0.1,
 			rate:0.5
 		},
+		speechText:'truthScanner',
+		setLanguage:this.scannerService.setLanguage(),				
+		
+		addSelfItem:this.scannerService.addSelfItem(),
+		removeSelfItem:this.scannerService.removeSelfItem(),		
+		saveSelfEntry:this.scannerService.saveSelfEntry(),
+		removeSavedEntry:this.scannerService.removeSavedEntry(),
+
+		selectedEnry:'',
+		selectSavedEntry:this.scannerService.selectSavedEntry(),		
+		
 		incRate:this.scannerService.incRate(),
 		decRate:this.scannerService.decRate(),
 		incPitch:this.scannerService.incPitch(),
 		decPitch:this.scannerService.decPitch(),
-		cameraText: {
+
+		appText: {
 			scaning:'Scaning',
 			noObject:'No object for scaning',
 			readyScan:'Ready scaning'
-		},
-		isFaceDetected: false,
-		handleFacesDetected:this.scannerService.handleFacesDetected()	
+		}			
 	}	
 
 	render() {  	

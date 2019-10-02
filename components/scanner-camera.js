@@ -8,7 +8,7 @@ class ScannerCamera extends React.Component {
 
   render() {
 
-    const { isScaning, cameraText, isFaceDetected } = this.context;   
+    const { isScaning, appText, isFaceDetected } = this.context;   
 
     if ( isScaning && isFaceDetected ) {   
 
@@ -18,7 +18,7 @@ class ScannerCamera extends React.Component {
 
           <ScannerLine/>
         
-          <Text style={style.textScaning}> {cameraText.scaning} </Text>
+          <Text style={style.textScaning}> {appText.scaning} </Text>
 
         </View>       
       );
@@ -29,7 +29,7 @@ class ScannerCamera extends React.Component {
        
         <View style={style.cameraContent}>
 
-          <Text style={style.text}> {cameraText.readyScan} </Text>
+          <Text style={style.text}> {appText.readyScan} </Text>
         
         </View>
       );
@@ -40,7 +40,7 @@ class ScannerCamera extends React.Component {
        
         <View style={style.cameraContent}>
 
-          <Text style={style.text}> {cameraText.noObject} </Text>
+          <Text style={style.text}> {appText.noObject} </Text>
         
         </View>
       );

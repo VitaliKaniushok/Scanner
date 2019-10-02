@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 const SelfNameList = (props)=> {
 
-	let {id, text, selectSavedEntry, removeSavedEntry } = props;
+	let {id, text, selectSavedEntry, removeSavedEntry, selectedEnry } = props;
 
   	++id;
 
@@ -12,7 +12,7 @@ const SelfNameList = (props)=> {
 	    <View style={styles.boxRemoveItem}>
 
         <TouchableOpacity 
-          style={styles.touchSelfText}
+          style={[styles.touchSelfText, selectedEnry=== text?styles.activeBoxRemoveItem:styles.noActiveBoxRemoveItem]}
           onPress = { selectSavedEntry }>                  
               
             <Text style={styles.selfText}>{id}.  {text}</Text>
@@ -41,6 +41,12 @@ const styles = StyleSheet.create({
     alignItems:'flex-end',
     justifyContent:'space-between' 
   },
+  activeBoxRemoveItem:{
+      backgroundColor: 'green'
+  },
+  noActiveBoxRemoveItem:{
+      backgroundColor: 'rgba(167,174,166,1)'
+  },
   removeItem:{
     width:45,
     height:45,
@@ -56,12 +62,17 @@ const styles = StyleSheet.create({
     color:'#fff'    
   },
   touchSelfText:{
-    flex:1
+    flex:1,
+    justifyContent:'center',
+    borderRadius:7
   },
   selfText: {
   	flex:1,
+    justifyContent:'center',   
     fontSize: 20,  
-    color: '#000'
+    color: '#000',
+    paddingTop:5,
+    paddingLeft:5
   }
   	
 });

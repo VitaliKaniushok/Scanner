@@ -18,7 +18,7 @@ function ScannerService(obj) {
 			}
 		}
 
-		handleFacesDetected() {
+		facesDetected() {
 
 			return function() {
 
@@ -71,7 +71,8 @@ function ScannerService(obj) {
 					return function(){
 							obj.setState({
 								selfMode:false,
-								speechText: mode				
+								speechText: mode,
+								selectedEnry:''				
 						});
 					}					
 				}								                
@@ -166,7 +167,7 @@ function ScannerService(obj) {
 
 					let {pitch} = state.speech;
 
-					if ( pitch === 0 ) return;
+					if ( pitch === 1 ) return;
 
 					pitch = (pitch*10+1)/10;
 
@@ -220,6 +221,7 @@ function ScannerService(obj) {
 												
 						let newState = {
 							...state,
+							selectedEnry:'',
 							speechText: newArr
 						}
 
@@ -266,21 +268,22 @@ function ScannerService(obj) {
 
 					const dir =FileSystem.documentDirectory;
 
-					// const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
+					const jsonData = await FileSystem.readAsStringAsync(dir+'dataSelf/dataNames.json');
 					
-			  //       let listData = JSON.parse(jsonData, function(k,v) {
+			        let listData = JSON.parse(jsonData);
 
-			  //       	if ( k === nameEntry )
+			        let newData;
 
-			  //       	return v;
-			  //       });
+			        for ( var key in listData) {
+			        	if (key == nameEntry) {
+			        		newData = listData[key]
+			        	}
+			        }
 
-			  //       listData =Object.value(jsonData);
-
-
-			  //       obj.setState({ 
-			  //     		speechText: listData  
-			  //     	})
+			        obj.setState({ 
+			      		speechText: newData,
+			      		selectedEnry: nameEntry 
+			      	})
 
 				}
 			}
@@ -308,11 +311,7 @@ function ScannerService(obj) {
 
 			        let data = JSON.stringify(newData);
 
-			        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', data);
-
-			        obj.setState({ 
-			      		speechText: []  
-			      	})
+			        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', data);       
 
 				}
 			}
@@ -344,6 +343,9 @@ function ScannerService(obj) {
 
 				        await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', newTexts);
 
+				        obj.setState({ 			      		
+				      		selectedEnry: newSelfText 
+				      	})
 				    } 
 				    else {
 
@@ -360,6 +362,9 @@ function ScannerService(obj) {
 
 				    	await FileSystem.writeAsStringAsync(dir+'dataSelf/dataNames.json', newTexts);
 
+				    	obj.setState({ 			      		
+				      		selectedEnry: newSelfText 
+				      	})
 				    }						
 				}
 			}			
