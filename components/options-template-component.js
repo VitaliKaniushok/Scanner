@@ -13,7 +13,7 @@ export default OptionsTemplateComponent;
 
 const style = StyleSheet.create({
 box: {
-    width:'100%',
+    flex:1,
     paddingTop:10,
     paddingBottom:20,
     paddingLeft:15,

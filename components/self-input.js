@@ -27,12 +27,14 @@ class SelfInput extends Component {
     this.setState({ dialogVisible: false });
   };
 
+  
+
   render () {
 
     const { addSelfItem, saveSelfEntry } = this.context;
 
     return(
-
+        
         <View style={styles.boxInput}>
 
           <TextInput
