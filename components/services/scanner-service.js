@@ -1,6 +1,7 @@
 import {Speech} from 'expo';
 import { Camera } from 'expo-camera';
 import textDefinition from './text-definition.js';
+import arrayLanguage from './arr-language-texts.js';
 import * as FileSystem from 'expo-file-system';
 
 function ScannerService(obj) {
@@ -93,7 +94,8 @@ function ScannerService(obj) {
 									...state.speech,
 									language: lang,
 									langDefinition:definition
-								}
+								},
+								appText: arrayLanguage[lang]								
 							}
 
 							return newState;				      		

@@ -7,7 +7,7 @@ class OptionsSpeechMode extends React.Component {
 
   	render() {  
 
-		const { speech, incPitch, decPitch, incRate, decRate } = this.context;
+		const { speech, incPitch, decPitch, incRate, decRate, appText } = this.context;
 
 		const pitch = speech.pitch *10;
 		const rate = speech.rate *10;
@@ -16,13 +16,13 @@ class OptionsSpeechMode extends React.Component {
 
 	        <OptionsTemplateComponent>
 
-	        	<Text style = { styles.text }>Speech settings</Text>
+	        	<Text style = { styles.text }>{appText.headSpeechSet}</Text>
 
 	        	<View style={styles.boxSettings}>
 
 	        		<View style={styles.box}>
 
-	        			<Text style = { styles.text }>Pitch</Text>
+	        			<Text style = { styles.text }>{appText.buttonPitch}</Text>
 
 	        			<View style={styles.boxButton}>
 
@@ -46,7 +46,7 @@ class OptionsSpeechMode extends React.Component {
 
 	        		<View style={styles.box}>
 
-	        			<Text style = { styles.text }>Rate</Text>
+	        			<Text style = { styles.text }>{appText.buttonRate}</Text>
 
 	        			<View style={styles.boxButton}>
 

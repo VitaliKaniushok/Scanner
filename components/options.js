@@ -4,21 +4,26 @@ import OptionsSelectMode from './options-select-mode.js';
 import OptionsSelfMode from './options-self-mode.js';
 import OptionsSpeechMode from './options-speech-mode.js';
 import OptionsSelectLanguage from './options-select-language.js';
+import {ContextApi} from './context-api.js';
 
-export default class Options extends React.Component {
+class Options extends React.Component {
 
-	static navigationOptions = {
-    title: 'Setting scanner',
-    headerStyle: {
-      backgroundColor: '#000'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      title: navigation.getParam('titleContext', ''),
+      headerStyle: {
+          backgroundColor: '#000'
+      },      
+      headerTintColor: '#fff',
+      headerTitleStyle: {
       fontWeight: 'bold'
+      } 
     }
   }
 
   state = {
+    topBarSetting:'',
     keyboardHeight: new Animated.Value(0)
   }
 
@@ -47,6 +52,19 @@ export default class Options extends React.Component {
     this.keyboardDidHideSub.remove();
   }
 
+  componentDidUpdate(prevProps,prevState) {
+
+    if(this.context.appText.topBarSetting !== prevState.topBarSetting) {
+
+      this.props.navigation.setParams({ titleContext: this.context.appText.topBarSetting })
+
+      this.setState({
+          topBarSetting:this.context.appText.topBarSetting
+      });
+      return 
+    }
+  }
+
 	render() {  
 
     	return (
@@ -72,6 +90,10 @@ export default class Options extends React.Component {
     	)
   }  
 }
+
+Options.contextType = ContextApi;
+
+export default Options;
 
 const styles = StyleSheet.create({
 

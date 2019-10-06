@@ -8,39 +8,59 @@ import * as FaceDetector from 'expo-face-detector';
 
 class Scanner extends React.Component {
 
-    static navigationOptions = {
-        title: 'Scanner',
-        headerStyle: {
-          backgroundColor: '#000'
-        },      
-        tabBarVisible:false,  
-        headerTintColor: '#0d7f06',
-        headerTitleStyle: {
-          fontWeight: 'bold'
-        }       
-    };    
+    static navigationOptions = ({ navigation }) => {
+
+        return {
+            title: navigation.getParam('titleContext', ''),
+            headerStyle: {
+                backgroundColor: '#000'
+            },      
+            tabBarVisible:false,  
+            headerTintColor: '#0d7f06',
+            headerTitleStyle: {
+                fontWeight: 'bold'
+            }   
+        }
+    }
+
+    state = {
+        isDetected:0,
+        topBarHome:''      
+    }
+
+    setTitle = () => this.props.navigation.setParams({ titleContext: this.context.appText.topBarHome });
 
     async componentDidMount() {
+        this.setTitle();
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
         const isPermission = status === 'granted';
         this.context.statusPermissions(isPermission);       
     };
 
-    state = {
-        isDetected:0
-    }
+    componentDidUpdate(prevProps,prevState) {
+
+        if(this.context.appText.topBarHome !== prevState.topBarHome) {
+
+          this.props.navigation.setParams({ titleContext: this.context.appText.topBarHome })
+
+          this.setState({
+              topBarHome:this.context.appText.topBarHome
+          });
+          return 
+        }
+      } 
 
     render() {
 
-        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, facesDetected } = this.context;
-
+        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, facesDetected, appText } = this.context;
+       
         if (hasCameraPermission === null) {
 
             return <View /> ;
 
         } else if (hasCameraPermission === false) {
 
-            return <Text> No access to camera </Text>;
+            return <Text style={styles.noAccesText}> No access to camera </Text>;
 
         } else {
 
@@ -104,8 +124,11 @@ class Scanner extends React.Component {
 	                	<TouchableOpacity 
 	                    	style = { style.buttonSettings }
 	                    	onPress={() => {
-                                if (isScaning) return;
-                                this.props.navigation.navigate('Details') }} >
+                                if (isScaning) return;                               
+                                this.props.navigation.navigate(
+                                    'Details', 
+                                    { titleContext:  this.context.appText.topBarSetting }) 
+                            }} >
 	                    		<Image
                                     style = { style.buttonImg }
                                     source={require('../sources/settings.png')}
@@ -125,6 +148,13 @@ export default Scanner;
 
 const style = StyleSheet.create({
     camera: { flex: 4},
+    noAccesText:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        fontSize:25,
+        color:'red'
+    },
     buttonGroup: {
         flex:1,
         flexDirection:'row',

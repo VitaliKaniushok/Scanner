@@ -7,32 +7,32 @@ class OptionsSelectMode extends React.Component {
 
   	render() {  
 
-		const { setMode, speechText } = this.context;
+		const { setMode, speechText, appText } = this.context;
 
 		return (
 
 	        <OptionsTemplateComponent>
 
-	        	<Text style = { styles.text }>Select Mode</Text>
+	        	<Text style = { styles.text }>{appText.selectLanguage}</Text>
 
 	        	<View style={styles.boxMode}>
 	       
 			        <TouchableOpacity 
 	                	style = { [styles.buttonMode, speechText==='truthScanner'?styles.activeButton:styles.noActiveButton] }
 	                	onPress = { setMode('truthScanner') }>
-	                		<Text style = { styles.text }>Truth detector</Text> 
+	                		<Text style = { styles.text }>{appText.buttonTruth}</Text> 
 	                </TouchableOpacity>
 
 	                <TouchableOpacity 
 	                	style = { [styles.buttonMode, speechText==='alienScanner'?styles.activeButton:styles.noActiveButton] }
 	                	onPress = { setMode('alienScanner') }>
-	                		<Text style = { styles.text }>Aliens detector</Text>
+	                		<Text style = { styles.text }>{appText.buttonAliens}</Text>
 	            	</TouchableOpacity>
 
 	            	<TouchableOpacity 
 	                	style = { [styles.buttonMode, (typeof speechText ==='object')?styles.activeButton:styles.noActiveButton] }
 	                	onPress = { setMode('selfMode') }>
-	                		<Text style = { styles.text }>Self Mode</Text>
+	                		<Text style = { styles.text }>{appText.buttonSelf}</Text>
 	            	</TouchableOpacity>
 
 	            </View>
@@ -49,11 +49,14 @@ const styles = StyleSheet.create({
 	boxMode:{
 		flex:1,
 		flexDirection:'row',		
-		justifyContent:'space-around'
+		justifyContent:'space-around',
+		paddingTop:15
 	},	
     buttonMode: {
-        height: 70,
-        width: 70,
+    	flexWrap:'wrap',
+	    padding: 10,	   
+        minHeight: 70,
+        maxWidth: 90,
         borderRadius: 10,        
         alignSelf: 'flex-end',
         alignItems: 'center',
@@ -65,6 +68,6 @@ const styles = StyleSheet.create({
     noActiveButton:{
     	backgroundColor: 'rgba(167,174,166,1)'
     },
-  	text: { fontSize: 14,  color: '#fff', textAlign:'center',paddingBottom:15 }
+  	text: { fontSize: 14,  color: '#fff', textAlign:'center' }
   	
 });

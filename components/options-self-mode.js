@@ -9,7 +9,7 @@ class OptionsSelfMode extends React.Component {
 
 	render() {  
 
-		const { selfMode } = this.context;
+		const { selfMode, appText } = this.context;
 
     if (selfMode === false) {
         return null
@@ -20,11 +20,11 @@ class OptionsSelfMode extends React.Component {
           	
       	<OptionsTemplateComponent>
 
-      		<Text style = { styles.textHeader }>Self mode</Text>
+      		<Text style = { styles.textHeader }>{appText.headSelfMode}</Text>
 
           <SelfTextsData />
 
-          <Text style = { styles.textHeader }>Add text</Text>
+          <Text style = { styles.textHeader }>{appText.headAddText}</Text>
 
           <SelfModeList />
 

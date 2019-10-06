@@ -53,6 +53,5 @@ const styles = StyleSheet.create({
   	flex:1,
     fontSize: 20,  
     color: '#000'
-  }
-  	
+  }  	
 });

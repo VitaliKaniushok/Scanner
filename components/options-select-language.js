@@ -9,7 +9,7 @@ class OptionsSelectLanguage extends React.Component {
 
   	render() {  
 
-		const { setLanguage, listVisible, hideList, speech } = this.context;
+		const { setLanguage, listVisible, hideList, speech, appText } = this.context;
 
     const path = DATA.find((el)=>  el.code === speech.language)
 
@@ -17,7 +17,7 @@ class OptionsSelectLanguage extends React.Component {
             	
         	<OptionsTemplateComponent>
 
-        		<Text style = { style.textHeader }>Select Language</Text>
+        		<Text style = { style.textHeader }>{appText.selectLanguage}</Text>
 
         		<TouchableOpacity 
               style={style.selectLanguage}

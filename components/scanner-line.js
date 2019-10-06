@@ -25,7 +25,7 @@ class RunLine extends React.Component {
 			    })
 			]),
 			{
-			   iterations: 1
+			   iterations: 2
 			}
 		).start(() => this.props.scaningResult())
 	}

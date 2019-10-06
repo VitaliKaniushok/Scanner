@@ -29,8 +29,6 @@ class SelfTextsData extends React.Component {
 
     	const dir =FileSystem.documentDirectory;
 
-    	// await FileSystem.deleteAsync(dir+'dataSelf');
-
         const dataNames = await FileSystem.getInfoAsync(dir+'dataSelf/dataNames.json');        
         
         if ( !dataNames.exists ) {
@@ -151,6 +149,5 @@ const styles = StyleSheet.create({
     activityIndicWrap:{
         flex:1,
         height:100
-    }
-  	
+    }  	
 });

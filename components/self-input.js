@@ -25,13 +25,11 @@ class SelfInput extends Component {
 
   handleSave = () => {   
     this.setState({ dialogVisible: false });
-  };
-
-  
+  };  
 
   render () {
 
-    const { addSelfItem, saveSelfEntry } = this.context;
+    const { addSelfItem, saveSelfEntry, appText } = this.context;
 
     return(
         
@@ -39,7 +37,7 @@ class SelfInput extends Component {
 
           <TextInput
             style={ styles.input}
-            placeholder="Type here to add!"
+            placeholder={this.context.appText.placeHolder}
             onChangeText={(text) => this.setState({text})}
             value={this.state.text}
           />
@@ -51,7 +49,7 @@ class SelfInput extends Component {
               style={styles.saveItem}
               onPress = { this.showDialog }>                  
                 
-              <Text style={styles.textSave}>Save entry</Text>
+              <Text style={styles.textSave}>{appText.buttonSave}</Text>
 
             </TouchableOpacity>
 

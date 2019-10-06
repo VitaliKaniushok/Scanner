@@ -52,9 +52,23 @@ export default class TwoMillion extends React.Component {
 		decPitch:this.scannerService.decPitch(),
 
 		appText: {
+			topBarHome:'Scanner',
+			topBarSetting:'Setting scanner',
+			placeHolder:'Type here to add!',
 			scaning:'Scaning',
 			noObject:'No object for scaning',
-			readyScan:'Ready scaning'
+			readyScan:'Ready scaning',
+			selectMode:'Select Mode',
+			selectLanguage:'Select Language',
+			buttonTruth:'Truth detector',
+			buttonAliens:'Aliens detector',
+			buttonSelf:'Self Mode',
+			headSelfMode:'Self mode',
+			headAddText:'Add text',
+			headSpeechSet:'Speech settings',
+			buttonPitch:'Pitch',
+			buttonRate:'Rate',
+			buttonSave:'Save'
 		}			
 	}	
 
