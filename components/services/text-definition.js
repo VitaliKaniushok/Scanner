@@ -1,18 +1,6 @@
+import truthAnswer from './truth-answer.js';
+import alienAnswer from './alien-answer.js';
 
-const truthScanner = [
-    "This is true",
-    "This is false",
-    "similar to the truth",
-    "something is wrong but similar to the truth",
-    "one hundred and two percent lies"
-];
-
-const alienScanner = [
-    "This is an alien",
-    "This is not an alien",
-    "I feel stardust, attention, this is an alien!"
-];
- 
 function chooseText(arg) {
 
     let l = arg.length;
@@ -30,16 +18,16 @@ function chooseText(arg) {
     return arg[i];
 }
 
-export default textDefinition = (arg) => {
+export default textDefinition = (arg, lang) => {
 
     switch (arg) {
 
         case 'truthScanner':
-            return chooseText(truthScanner);
+            return chooseText(truthAnswer[lang]);
             break;
 
         case 'alienScanner':
-            return chooseText(alienScanner);
+            return chooseText(alienAnswer[lang]);
             break;
 
         default:

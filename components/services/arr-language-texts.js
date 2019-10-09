@@ -20,6 +20,26 @@ const arrayLanguage = {
 		buttonSave:'Save'
 	},
 
+	pl: {
+		topBarHome: "Skaner",
+		topBarSetting: "Ustawianie skanera",
+		placeHolder: "Wpisz tutaj, aby dodać!",
+		skanowanie: "skanowanie",
+		noObject: "Brak obiektu do skanowania",
+		readyScan: "Gotowy do skanowania",
+		selectMode: "Wybierz tryb",
+		selectLanguage: "Wybierz język",
+		buttonTruth: "Detektor prawdy",
+		buttonAliens: "Detektor kosmitów",
+		buttonSelf: "Tryb własny",
+		headSelfMode: "Tryb własny",
+		headAddText: "Dodaj tekst",
+		headSpeechSet: "Ustawienia mowy",
+		buttonPitch: "Wysokość tonu",
+		buttonRate: "Szybkość",
+		buttonSave: "Zapisz"
+	},
+
 	ru: {
 		topBarHome:'Cканер',
 		topBarSetting:'Настройка сканера',

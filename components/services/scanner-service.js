@@ -376,7 +376,7 @@ function ScannerService(obj) {
 			
 			return function() {				
 
-				let text = textDefinition(obj.state.speechText);
+				let text = textDefinition(obj.state.speechText, obj.state.speech.language);
 
 				if (!obj.state.isFaceDetected) {
 

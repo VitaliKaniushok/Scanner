@@ -11,6 +11,13 @@ class SelfInput extends Component {
     dialogVisible: false
   }
 
+  changeText = (text) => {
+
+    if (text.match(/((^[^a-z]))|([^a-z0-9_])/i))  return;
+
+    this.setState({text})
+  }
+
   clearState=()=> {
     this.setState({text:''})
   }
@@ -37,8 +44,10 @@ class SelfInput extends Component {
 
           <TextInput
             style={ styles.input}
+            maxLength={120}
+            multiline = {true}
             placeholder={this.context.appText.placeHolder}
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={changeText(text)}
             value={this.state.text}
           />
 
@@ -88,6 +97,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontSize:22,
     color:'#000',
+    textAlignVertical: 'top',
     backgroundColor:'#fff'
   },
   buttonsBox: {
