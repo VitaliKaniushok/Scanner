@@ -13,8 +13,7 @@ class SelfInput extends Component {
 
   changeText = (text) => {
 
-    if (text.match(/((^[^a-z]))|([^a-z0-9_])/i))  return;
-
+    if ( text.match( /(^[\s])/g ) ) return;
     this.setState({text})
   }
 
@@ -44,10 +43,10 @@ class SelfInput extends Component {
 
           <TextInput
             style={ styles.input}
-            maxLength={120}
+            maxLength={150}
             multiline = {true}
             placeholder={this.context.appText.placeHolder}
-            onChangeText={changeText(text)}
+            onChangeText={this.changeText}
             value={this.state.text}
           />
 
@@ -76,7 +75,9 @@ class SelfInput extends Component {
             visible={this.state.dialogVisible}
             handleCancel={this.handleCancel}
             handleSave={this.handleSave}
-            saveSelfEntry={ saveSelfEntry }/>
+            saveSelfEntry={ saveSelfEntry }
+            labelSave={appText.buttonSave}
+            labelCancel={appText.buttonCancel}/>
 
         </View>
     )

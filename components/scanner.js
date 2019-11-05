@@ -52,7 +52,7 @@ class Scanner extends React.Component {
 
     render() {
 
-        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, facesDetected, appText } = this.context;
+        const { hasCameraPermission, scaning, setCameraType, isScaning, cameraType, facesDetected, appText, speech } = this.context;
        
         if (hasCameraPermission === null) {
 
@@ -72,20 +72,39 @@ class Scanner extends React.Component {
                         type={cameraType}
                         onFacesDetected={ ({faces}) => {
 
-                                if( faces.length === this.state.isDetected ) return;
+                                const fl = faces.length;
+                                const isDetected = this.state.isDetected;
+                                const progressSpeak = speech.progressSpeak;
 
-                                if( faces.length == 0 ) {
+                                if (fl === isDetected) {
+
+                                    return;
+
+                                } else if ( (fl > 0) && (isDetected > 0)  ) {
+
+                                    return this.setState({
+                                        isDetected: fl
+                                    });
+
+                                } else if (fl > 0) {
+
+                                    if (progressSpeak) return;
+
+                                    facesDetected();
+                                    return this.setState({
+                                        isDetected: fl
+                                    });
+
+                                } else if (fl === 0) {
+
+                                    if (progressSpeak) return;
 
                                     facesDetected();
                                     return this.setState({
                                         isDetected: 0
                                     });
                                 }
-
-                                facesDetected();
-                                this.setState({
-                                    isDetected: faces.length
-                                })                            
+                                                                                                                                             
                             }                            
                         }
 
@@ -95,7 +114,7 @@ class Scanner extends React.Component {
                             runClassifications: FaceDetector.Constants.Classifications.none,
                             minDetectionInterval: 100,
                             tracking: true }}
-                             >                    
+                    >                    
 
                         <ScannerCamera />
 
@@ -108,7 +127,7 @@ class Scanner extends React.Component {
 	                    	onPress = { setCameraType }>
 	                    		<Image
                                     style = { style.buttonImg }
-                                    source={require('../sources/change_camera.png')}
+                                    source={require('../assets/change_camera.png')}
                                   />
 	                	</TouchableOpacity>
 
@@ -117,7 +136,7 @@ class Scanner extends React.Component {
                             onPress = { scaning }>
                                 <Image
                                     style = { style.buttonImg }
-                                    source={require('../sources/push.png')}
+                                    source={require('../assets/push.png')}
                                   /> 
                         </TouchableOpacity>
 
@@ -131,7 +150,7 @@ class Scanner extends React.Component {
                             }} >
 	                    		<Image
                                     style = { style.buttonImg }
-                                    source={require('../sources/settings.png')}
+                                    source={require('../assets/settings.png')}
                                   />
 	                	</TouchableOpacity>
 

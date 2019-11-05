@@ -11,7 +11,7 @@ function ScannerService(obj) {
 		scaning() {
 			return function() {
 
-				if ( (obj.state.isScaning) || (!obj.state.isFaceDetected) ) return;
+				if ( (obj.state.isScaning) || (!obj.state.isFaceDetected) || (obj.state.speech.progressSpeak) ) return;
 
 				obj.setState({
 					isScaning: true				
@@ -21,7 +21,7 @@ function ScannerService(obj) {
 
 		facesDetected() {
 
-			return function() {
+			return function() {				
 
 				obj.setState({
 					isFaceDetected: !obj.state.isFaceDetected					
@@ -381,8 +381,7 @@ function ScannerService(obj) {
 				if (!obj.state.isFaceDetected) {
 
 					obj.setState({ 
-			      		isScaning: false,
-			      		isFaceDetected: false  
+			      		isScaning: false
 			      	})
 
 					return;
@@ -399,22 +398,22 @@ function ScannerService(obj) {
 			    const complete = () => {
 			      	obj.state.speech.progressSpeak && 
 			      	obj.setState( state => ({ 
-			      		isScaning: false,
+			      		isScaning: false,			      		
 			      		speech: { 
 							...state.speech,
 							progressSpeak: false } 
 			      		}),
 			      	);
 			    };
-
+			   
 			    Speech.speak(text, {
 			      	language: obj.state.speech.language,
 			      	pitch: obj.state.speech.pitch,
 			      	rate: obj.state.speech.rate,
 			      	onStart: start,
-			      	onDone: complete,
-			      	onStopped: complete,
-			      	onError: complete
+			      	onDone: complete
+			      	// onStopped: Speech.stop(),
+			      	// onError: complete
 			    });
 			}
 		}

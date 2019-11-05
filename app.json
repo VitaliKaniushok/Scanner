@@ -1,13 +1,11 @@
 {
   "expo": {
-    "name": "Scanner UFO",
-    "slug": "scanner",
+    "name": "Truth detector",
+    "slug": "truth_detector",
     "privacy": "public",
     "sdkVersion": "33.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
+    "platforms": [      
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,6 +14,9 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "com.msm_codes.truth_detector"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

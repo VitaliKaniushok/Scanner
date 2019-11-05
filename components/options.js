@@ -69,7 +69,7 @@ class Options extends React.Component {
 
     	return (
 
-        <Animated.View style={[styles.animatedBox,{paddingBottom:this.state.keyboardHeight}]}>
+        <Animated.View style={[styles.animatedBox,{marginBottom:this.state.keyboardHeight}]}>
 
 	        <ScrollView 
             style={styles.optionsContainer}
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 	},
   animatedBox: {
     flex:1,
-    justifyContent:'flex-end'        
+    justifyContent:'flex-start'        
   },
   innerContainer: {
     flex: 1,

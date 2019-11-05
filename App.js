@@ -68,7 +68,8 @@ export default class TwoMillion extends React.Component {
 			headSpeechSet:'Speech settings',
 			buttonPitch:'Pitch',
 			buttonRate:'Rate',
-			buttonSave:'Save'
+			buttonSave:'Save',
+			buttonCancel:'Cancel'
 		}			
 	}	
 

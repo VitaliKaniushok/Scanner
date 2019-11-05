@@ -14,10 +14,15 @@ export default class DialogSaveEntry extends React.Component {
 			fn2();
 		}				
 	}
+	changeText = (text) => {
+	    
+	    if ( text.match( /(^[\s])/g ) ) return;
+	    this.setState({text})
+	  }
 
 	render () {
 
-		const { handleCancel, saveSelfEntry, handleSave } = this.props;
+		const { handleCancel, saveSelfEntry, handleSave, labelSave, labelCancel } = this.props;
 
 	    return (
 	      <View>
@@ -29,10 +34,10 @@ export default class DialogSaveEntry extends React.Component {
 	          </Dialog.Description>
 	          <Dialog.Input 
 	          	style={styles.input}
-	          	onChangeText={(text) => this.setState({text})}
+	          	onChangeText={this.changeText}
             	value={this.state.text}/>
-	          <Dialog.Button label="Cancel" onPress={handleCancel}/>
-	          <Dialog.Button label="Save" onPress={this.handleS(saveSelfEntry(this.state.text),handleSave)}/>
+	          <Dialog.Button label={labelCancel} onPress={handleCancel}/>
+	          <Dialog.Button label={labelSave} onPress={this.handleS(saveSelfEntry(this.state.text),handleSave)}/>
 	        </Dialog.Container>
 	      </View>
 	    )

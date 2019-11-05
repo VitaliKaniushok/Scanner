@@ -17,7 +17,8 @@ const arrayLanguage = {
 		headSpeechSet:'Speech settings',
 		buttonPitch:'Pitch',
 		buttonRate:'Rate',
-		buttonSave:'Save'
+		buttonSave:'Save',
+		buttonCancel:'Cancel'
 	},
 
 	pl: {
@@ -37,7 +38,8 @@ const arrayLanguage = {
 		headSpeechSet: "Ustawienia mowy",
 		buttonPitch: "Wysokość tonu",
 		buttonRate: "Szybkość",
-		buttonSave: "Zapisz"
+		buttonSave: "Zapisz",
+		buttonCancel:"Anuluj"
 	},
 
 	ru: {
@@ -46,7 +48,7 @@ const arrayLanguage = {
 		placeHolder:'Нажмите здесь, чтобы добавить текст!',
 		scaning:'Cканирование',
 		noObject:'Нет объекта для сканирования',
-		readyScan:'Готов k сканировнию',
+		readyScan:'Готов к сканировнию',
 		selectMode:'Выберите режим',
 		selectLanguage:'Выберите язык',
 		buttonTruth:'Детектор правды',
@@ -57,7 +59,8 @@ const arrayLanguage = {
 		headSpeechSet:'Настройки речи',
 		buttonPitch:'Tембр',
 		buttonRate:'Tемп',
-		buttonSave:'Сохранить'
+		buttonSave:'Сохранить',
+		buttonCancel:'Отмена'
 	},
 
 	ja: {
@@ -77,7 +80,8 @@ const arrayLanguage = {
 		headSpeechSet:'音声設定',
 		buttonPitch:'ピッチ',
 		buttonRate:'割合',
-		buttonSave:'セーブ'
+		buttonSave:'セーブ',
+		buttonCancel:'キャンセル'
 	},
 
 	fr: {
@@ -97,7 +101,8 @@ const arrayLanguage = {
 		headSpeechSet:'Paramètres de la parole',
 		buttonPitch:'Le pas',
 		buttonRate:'Taux',
-		buttonSave:'sauver'
+		buttonSave:'sauver',
+		buttonCancel:'Annuler'
 	},
 
 	zh: {
@@ -117,7 +122,71 @@ const arrayLanguage = {
 		headSpeechSet:'语音设定',
 		buttonPitch:'沥青',
 		buttonRate:'率',
-		buttonSave:'救'
+		buttonSave:'救',
+		buttonCancel:'取消'
+	},
+
+	es: {
+		topBarHome: "Escáner",
+		topBarSetting: "Configuración del escáner",
+		placeHolder: "¡Ingrese aquí para agregar!",
+		scaning: "escaneo",
+		noObject: "No hay objeto para escanear",
+		readyScan: "Listo para escanear",
+		selectMode: "Elegir modo",
+		selectLanguage: "Elegir idioma",
+		buttonTruth: "Detector de verdad",
+		buttonAliens: "Detector alienígena",
+		buttonSelf: "Modo propio",
+		headSelfMode: "Modo propio",
+		headAddText: "Agregar texto",
+		headSpeechSet: "Configuración de voz",
+		buttonPitch: "pitch",
+		buttonRate: "Velocidad",
+		buttonSave: "Guardar",
+		buttonCancel: "Cancelar"
+	},
+
+	de: {
+		topBarHome: "Scanner",
+		topBarSetting: "Einrichten des Scanners",
+		placeHolder: "Hier eingeben, um hinzuzufügen!",
+		scaning: "Scannen",
+		noObject: "Kein Objekt zum Scannen",
+		readyScan: "Bereit zum Scannen",
+		selectMode: "Modus wählen",
+		selectLanguage: "Sprache wählen",
+		buttonTruth: "Wahrheitsdetektor",
+		buttonAliens: "Alien Detector",
+		buttonSelf: "Eigener Modus",
+		headSelfMode: "Eigener Modus",
+		headAddText: "Text hinzufügen",
+		headSpeechSet: "Spracheinstellungen",
+		buttonPitch: "pitch",
+		buttonRate: "Geschwindigkeit",
+		buttonSave: "Speichern",
+		buttonCancel: "Abbrechen"
+	},
+
+	it: {
+		topBarHome: "Scanner",
+		topBarSetting: "Installazione dello scanner",
+		placeHolder: "Inserisci qui per aggiungere!",
+		scaning: "scansione",
+		noObject: "Nessun oggetto da scansionare",
+		readyScan: "Pronto per la scansione",
+		selectMode: "Scegli modalità",
+		selectLanguage: "Scegli la lingua",
+		buttonTruth: "Rilevatore di verità",
+		buttonAliens: "Alien Detector",
+		buttonSelf: "Modalità propria",
+		headSelfMode: "Modalità propria",
+		headAddText: "Aggiungi testo",
+		headSpeechSet: "Impostazioni del parlato",
+		buttonPitch: "pitch",
+		buttonRate: "Velocità",
+		buttonSave: "Salva",
+		buttonCancel: "Annulla"
 	}
 }
 
